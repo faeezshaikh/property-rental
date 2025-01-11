@@ -34,26 +34,46 @@ export default function PropertyCard({ property, onDelete }: PropertyCardProps) 
   };
 
   return (
-    <div className="border rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+    <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
       <ImageCarousel 
         images={[property.imageUrl, ...(property.images || [])]} 
         alt={property.title}
       />
-      <div className="p-4">
-        <h2 className="text-xl font-semibold mb-2">{property.title}</h2>
-        <p className="text-gray-600 dark:text-gray-300 mb-2">{property.address}</p>
-        <div className="flex justify-between items-center mb-2">
-          <span className="text-lg font-bold">${property.price}/month</span>
-          <span className="text-sm text-gray-500">
-            {property.bedrooms} beds • {property.bathrooms} baths
-          </span>
+      <div className="p-5">
+        <h2 className="text-xl font-bold mb-2 text-gray-800">{property.title}</h2>
+        <p className="text-gray-600 mb-3 flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 mr-1">
+            <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+          </svg>
+          {property.address}
+        </p>
+        <div className="flex justify-between items-center mb-3">
+          <span className="text-2xl font-bold text-[#FF385C]">${property.price}/month</span>
+          <div className="flex items-center text-gray-500 text-sm">
+            <span className="flex items-center mr-3">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 mr-1">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
+              </svg>
+              {property.bedrooms} beds
+            </span>
+            <span className="flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-4 h-4 mr-1">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5m8.25 3v6.75m0 0l-3-3m3 3l3-3M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z" />
+              </svg>
+              {property.bathrooms} baths
+            </span>
+          </div>
         </div>
-        <div className="flex justify-between mt-4">
+        <div className="flex justify-between items-center pt-3 border-t">
           <Link 
             href={`/properties/${property.id}`}
-            className="text-blue-600 hover:underline"
+            className="text-[#FF385C] hover:text-[#E31C5F] font-semibold flex items-center"
           >
             View Details
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-4 h-4 ml-1">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
           </Link>
           <div className="flex gap-2">
             <button

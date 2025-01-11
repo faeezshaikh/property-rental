@@ -46,14 +46,14 @@ export default function PriceRangeSlider({ minPrice, maxPrice, onPriceChange, in
         onValueChange={handleRangeChange}
       >
         <Slider.Track className="bg-gray-200 relative grow rounded-full h-2">
-          <Slider.Range className="absolute bg-blue-600 rounded-full h-full" />
+          <Slider.Range className="absolute bg-[#FF385C] rounded-full h-full" />
         </Slider.Track>
         <Slider.Thumb
-          className="block w-5 h-5 bg-white border-2 border-blue-600 rounded-full hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="block w-5 h-5 bg-white border-2 border-[#FF385C] rounded-full hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-[#FF385C]"
           aria-label="Minimum price"
         />
         <Slider.Thumb
-          className="block w-5 h-5 bg-white border-2 border-blue-600 rounded-full hover:bg-blue-50 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="block w-5 h-5 bg-white border-2 border-[#FF385C] rounded-full hover:bg-red-50 focus:outline-none focus:ring-2 focus:ring-[#FF385C]"
           aria-label="Maximum price"
         />
       </Slider.Root>
