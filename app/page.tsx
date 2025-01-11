@@ -44,30 +44,15 @@ export default function Home() {
 
   return (
     <div className="min-h-screen p-8">
-      <header className="mb-8">
-        <div className="flex justify-between items-center mb-4">
-          <h1 className="text-3xl font-bold">Rental Properties</h1>
-          <div className="flex gap-4 items-center">
-            <input
-              type="text"
-              placeholder="Search properties..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700"
-            />
-            <AddPropertyButton onAdd={handleAddProperty} />
-          </div>
-        </div>
-        <div className="mt-6 max-w-xl">
-          <PriceRangeSlider
-            minPrice={minPrice}
-            maxPrice={maxPrice}
-            onPriceChange={handlePriceChange}
-          />
-        </div>
-      </header>
+      <div className="mt-6 max-w-xl">
+        <PriceRangeSlider
+          minPrice={minPrice}
+          maxPrice={maxPrice}
+          onPriceChange={handlePriceChange}
+        />
+      </div>
 
-      <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <main className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
         {filteredProperties.map((property) => (
           <PropertyCard 
             key={property.id} 
