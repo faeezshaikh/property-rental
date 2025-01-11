@@ -7,14 +7,25 @@ interface PriceRangeSliderProps {
   minPrice: number;
   maxPrice: number;
   onPriceChange: (min: number, max: number) => void;
+  initialRange: [number, number];
 }
 
-export default function PriceRangeSlider({ minPrice, maxPrice, onPriceChange }: PriceRangeSliderProps) {
-  const [range, setRange] = useState([minPrice, maxPrice]);
+export default function PriceRangeSlider({ minPrice, maxPrice, onPriceChange, initialRange }: PriceRangeSliderProps) {
+  const [range, setRange] = useState(initialRange);
 
+  // Only update range when initialRange changes
   useEffect(() => {
-    onPriceChange(range[0], range[1]);
-  }, [range, onPriceChange]);
+    if (range[0] !== initialRange[0] || range[1] !== initialRange[1]) {
+      setRange(initialRange);
+    }
+  }, [initialRange]);
+
+  // Only notify parent when range changes due to user interaction
+  const handleRangeChange = (value: number[]) => {
+    const newRange = value as [number, number];
+    setRange(newRange);
+    onPriceChange(newRange[0], newRange[1]);
+  };
 
   return (
     <div className="w-full px-2">
@@ -32,7 +43,7 @@ export default function PriceRangeSlider({ minPrice, maxPrice, onPriceChange }: 
         max={maxPrice}
         min={minPrice}
         step={10}
-        onValueChange={setRange}
+        onValueChange={handleRangeChange}
       >
         <Slider.Track className="bg-gray-200 relative grow rounded-full h-2">
           <Slider.Range className="absolute bg-blue-600 rounded-full h-full" />

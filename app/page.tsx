@@ -3,44 +3,44 @@
 import { useState, useCallback, useEffect } from 'react';
 import { RentalProperty } from "./types/property";
 import PropertyCard from "./components/PropertyCard";
-import AddPropertyButton from "./components/AddPropertyButton";
 import { useProperties } from './context/PropertiesContext';
 import PriceRangeSlider from './components/PriceRangeSlider';
 
 export default function Home() {
-  const { properties, setProperties, addProperty } = useProperties();
+  const { properties } = useProperties();
   const [searchQuery, setSearchQuery] = useState('');
   
   // Calculate min and max prices from properties
   const minPrice = Math.min(...properties.map(p => p.price));
   const maxPrice = Math.max(...properties.map(p => p.price));
   
-  // Initialize price range with calculated values
-  const [priceRange, setPriceRange] = useState<[number, number]>([minPrice, maxPrice]);
+  // Initialize price range with null to indicate it hasn't been set yet
+  const [priceRange, setPriceRange] = useState<[number, number] | null>(null);
 
-  // Update price range when properties change
+  // Update price range when properties change or on initial load
   useEffect(() => {
-    setPriceRange([minPrice, maxPrice]);
-  }, [properties.length, minPrice, maxPrice]);
+    if (properties.length > 0) {
+      const min = Math.min(...properties.map(p => p.price));
+      const max = Math.max(...properties.map(p => p.price));
+      setPriceRange([min, max]);
+    }
+  }, [properties]);
 
   const handlePriceChange = useCallback((min: number, max: number) => {
     setPriceRange([min, max]);
   }, []);
 
-  const handleAddProperty = (newProperty: RentalProperty) => {
-    console.log('Home handling new property:', newProperty);
-    addProperty(newProperty);
-  };
-
-  const handleDeleteProperty = (id: string) => {
-    setProperties(properties.filter(property => property.id !== id));
-  };
-
+  // Only filter properties if priceRange has been initialized
   const filteredProperties = properties.filter(property =>
     property.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
-    property.price >= priceRange[0] &&
-    property.price <= priceRange[1]
+    (!priceRange || (
+      property.price >= priceRange[0] &&
+      property.price <= priceRange[1]
+    ))
   );
+
+  // Don't render the slider until we have the price range
+  if (!priceRange) return null;
 
   return (
     <div className="min-h-screen p-8">
@@ -49,6 +49,7 @@ export default function Home() {
           minPrice={minPrice}
           maxPrice={maxPrice}
           onPriceChange={handlePriceChange}
+          initialRange={priceRange}
         />
       </div>
 
@@ -56,8 +57,8 @@ export default function Home() {
         {filteredProperties.map((property) => (
           <PropertyCard 
             key={property.id} 
-            property={property} 
-            onDelete={handleDeleteProperty}
+            property={property}
+            onDelete={() => {}} // Added required onDelete prop
           />
         ))}
       </main>

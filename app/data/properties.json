@@ -38,5 +38,17 @@
     "id": "35f5abbf-1190-437e-87e1-8b8b981d76f7",
     "createdAt": "2025-01-11T18:16:18.479Z",
     "updatedAt": "2025-01-11T18:16:18.479Z"
+  },
+  {
+    "title": "wersaefs",
+    "address": "werwer",
+    "price": 5000,
+    "bedrooms": 4,
+    "bathrooms": 4,
+    "description": "3werew",
+    "imageUrl": "https://media.istockphoto.com/id/181900066/photo/housing-construction-36.jpg?s=1024x1024&w=is&k=20&c=_7tjnrIlIM6eOvsmaTYKjNiVW4P_tsK83gi_QYhX9G0=",
+    "id": "0dbadcf2-c3db-4479-a725-23daabc5acf9",
+    "createdAt": "2025-01-11T18:46:54.035Z",
+    "updatedAt": "2025-01-11T18:46:54.035Z"
   }
 ]

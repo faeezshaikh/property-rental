@@ -3,8 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from 'sonner';
 import { PropertiesProvider } from './context/PropertiesContext';
-import ProfileMenu from './components/ProfileMenu';
-import AddPropertyButton from './components/AddPropertyButton';
+import Header from './components/Header';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,20 +29,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <PropertiesProvider>
-          <header className="border-b">
-            <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-              <h1 className="text-xl font-semibold">Rental Properties</h1>
-              <div className="flex items-center gap-4">
-                <input
-                  type="text"
-                  placeholder="Search properties..."
-                  className="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-800 dark:border-gray-700"
-                />
-                <AddPropertyButton />
-                <ProfileMenu />
-              </div>
-            </div>
-          </header>
+          <Header />
           {children}
           <Toaster />
         </PropertiesProvider>
